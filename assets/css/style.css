@@ -1,0 +1,287 @@
+/* Fonts Setup */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap');
+
+:root {
+    --brand: #D4F011;
+    --dark: #0f0f0f;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark);
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand);
+}
+
+/* Utilities */
+.text-brand {
+    color: var(--brand);
+}
+
+.bg-brand {
+    background-color: var(--brand);
+}
+
+.border-brand {
+    border-color: var(--brand);
+}
+
+/* Neon Glow Effect */
+.glow-text {
+    text-shadow: 0 0 10px rgba(212, 240, 17, 0.5);
+}
+
+.glow-box:hover {
+    box-shadow: 0 0 20px rgba(212, 240, 17, 0.3);
+}
+
+/* Blur Background */
+.glass-nav {
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hero Overlay */
+.hero-overlay {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4));
+}
+
+/* Card Hover Animations */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+}
+
+/* Stats Counter */
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+/* Pricing Card - Popular */
+.price-card.popular {
+    transform: scale(1.05);
+    border: 1px solid var(--brand);
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(212, 240, 17, 0.15);
+}
+
+@media (max-width: 1024px) {
+    .price-card.popular {
+        transform: scale(1);
+    }
+}
+
+/* Testimonial Active Dot */
+.dot.active {
+    background-color: var(--brand);
+    width: 24px;
+}
+
+/* Animations */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating WhatsApp Pulse */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+.whatsapp-float {
+    animation: pulse-green 2s infinite;
+}
+
+/* Navbar Link Active */
+.nav-link.active {
+    color: var(--brand) !important;
+}
+
+/* Gallery Grid overlay */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Toast Customization */
+.toast-custom {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid var(--brand);
+}
+
+/* Custom Accordion Overrides for Dark Mode */
+.accordion-item {
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.5rem !important;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background-color: #1a1a1a !important;
+    color: white !important;
+    box-shadow: none !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--brand) !important;
+    color: var(--dark) !important;
+}
+
+/* Fix accordion arrow icon colors via filter */
+.accordion-button::after {
+    filter: invert(1);
+    /* White arrow for dark background */
+    transition: transform 0.3s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: invert(0);
+    /* Black arrow for bright brand background */
+}
+
+.accordion-body {
+    background-color: #111 !important;
+    color: #ccc !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* FIX: Tailwind 'collapse' utility conflicts with Bootstrap 'collapse' class. 
+   Tailwind sets visibility: collapse, hiding the element when it should be shown.
+   We force visibility: visible when Bootstrap adds the .show class. */
+.accordion-collapse.collapse.show {
+    visibility: visible !important;
+}
+
+/* Infinite Marquee logo ticker */
+.marquee-container {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: 4rem;
+    animation: scroll-marquee 25s linear infinite;
+}
+
+.marquee-content span {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.marquee-content span:hover {
+    transform: scale(1.05);
+}
+
+@keyframes scroll-marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Modal Open Transitions */
+#bookingModal.show {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+#bookingModal.show > div {
+    transform: translateY(0) !important;
+}
+
+/* Gallery Item Hover & Lightbox Transitions */
+.gallery-item {
+    cursor: pointer;
+}
+
+#lightboxModal.show {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+#lightboxModal.show img {
+    transform: scale(1) !important;
+}
