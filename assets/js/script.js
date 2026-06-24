@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toggleMenu() {
         mobileMenu.classList.toggle('-translate-x-full');
+        mobileMenu.classList.toggle('menu-open');
     }
 
     if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
@@ -587,5 +588,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // --- FAQ Active State Toggle ---
+    const faqAccordion = document.getElementById('faqAccordion');
+    if (faqAccordion) {
+        faqAccordion.addEventListener('show.bs.collapse', (e) => {
+            const item = e.target.closest('.accordion-item-custom');
+            if (item) item.classList.add('active-item');
+        });
+        faqAccordion.addEventListener('hide.bs.collapse', (e) => {
+            const item = e.target.closest('.accordion-item-custom');
+            if (item) item.classList.remove('active-item');
+        });
+    }
 
 });

@@ -121,7 +121,7 @@ h6 {
 .fade-up {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-up.visible {
@@ -285,3 +285,178 @@ h6 {
 #lightboxModal.show img {
     transform: scale(1) !important;
 }
+
+
+/* UX Enhancements: Focus & Micro-interactions */
+:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 4px;
+}
+
+button:focus:not(:focus-visible), a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Enhanced Hover Effects */
+.btn-hover-fx {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-hover-fx:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 240, 17, 0.3);
+}
+
+.btn-hover-fx:active {
+    transform: translateY(0);
+}
+
+input, textarea {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--brand) !important;
+    box-shadow: 0 0 0 1px var(--brand) !important;
+}
+
+/* Smarter animations */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Premium Accordion Styling */
+.accordion-item-custom {
+    background: rgba(255, 255, 255, 0.02) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    margin-bottom: 1.25rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.accordion-item-custom:hover {
+    border-color: rgba(212, 240, 17, 0.25) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.accordion-item-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--brand);
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.accordion-item-custom.active-item {
+    border-color: rgba(212, 240, 17, 0.4) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 25px rgba(212, 240, 17, 0.05);
+}
+
+.accordion-item-custom.active-item::before {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.accordion-button-custom {
+    background: transparent !important;
+    color: #ffffff !important;
+    padding: 1.5rem 1.75rem !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+.accordion-button-custom:hover {
+    color: var(--brand) !important;
+}
+
+.accordion-button-custom:not(.collapsed) {
+    color: var(--brand) !important;
+}
+
+.accordion-icon-custom {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.accordion-button-custom:hover .accordion-icon-custom {
+    border-color: rgba(212, 240, 17, 0.5);
+    color: var(--brand);
+    background: rgba(212, 240, 17, 0.05);
+}
+
+.accordion-button-custom:not(.collapsed) .accordion-icon-custom {
+    background: var(--brand);
+    color: var(--dark);
+    border-color: var(--brand);
+    transform: rotate(180deg);
+    box-shadow: 0 0 15px rgba(212, 240, 17, 0.4);
+}
+
+.accordion-body-custom {
+    padding: 0 1.75rem 1.75rem 1.75rem !important;
+    color: #a0aec0 !important;
+    font-size: 1rem;
+    line-height: 1.6;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Mobile Menu Stagger Animations */
+.mobile-link {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+#mobile-menu.menu-open .mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#mobile-menu.menu-open .flex-col > .mobile-link:nth-child(1) { transition-delay: 40ms; }
+#mobile-menu.menu-open .flex-col > .mobile-link:nth-child(2) { transition-delay: 80ms; }
+#mobile-menu.menu-open .flex-col > .mobile-link:nth-child(3) { transition-delay: 120ms; }
+#mobile-menu.menu-open .flex-col > .mobile-link:nth-child(4) { transition-delay: 160ms; }
+#mobile-menu.menu-open .flex-col > .mobile-link:nth-child(5) { transition-delay: 200ms; }
+#mobile-menu.menu-open .flex-col > .mobile-link:nth-child(6) { transition-delay: 240ms; }
+#mobile-menu.menu-open .mt-8 .mobile-link { transition-delay: 280ms; }
