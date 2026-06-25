@@ -1,10 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- Navbar Scroll Effect ---
+    // --- Smooth Scrolling with Lenis ---
+    let lenis = null;
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!isReducedMotion && typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+            smoothWheel: true,
+            wheelMultiplier: 1.0,
+            touchMultiplier: 1.5,
+            infinite: false
+        });
+
+        // Frame loop
+        function raf(time) {
+            if (lenis) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+        }
+        requestAnimationFrame(raf);
+    }
+
+    // --- Cached Offset Navigation & Scroll System ---
     const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
     
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+    let cachedSections = [];
+
+    function updateSectionOffsets() {
+        cachedSections = Array.from(sections).map(section => ({
+            id: section.getAttribute('id'),
+            top: section.offsetTop,
+            height: section.clientHeight
+        }));
+    }
+
+    // Run cache calculation once and update on window resize (avoid layout thrashing)
+    updateSectionOffsets();
+    window.addEventListener('resize', updateSectionOffsets, { passive: true });
+
+    // Single unified scroll handler
+    function handleScroll(scrollY) {
+        // Navbar glass effect
+        if (scrollY > 50) {
             navbar.classList.add('glass-nav', 'shadow-lg');
             navbar.classList.remove('bg-transparent', 'py-6');
             navbar.classList.add('bg-dark/90', 'py-3');
@@ -12,16 +55,84 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.remove('glass-nav', 'shadow-lg', 'bg-dark/90', 'py-3');
             navbar.classList.add('bg-transparent', 'py-6');
         }
-        
+
         // Back to top button visibility
-        const backToTop = document.getElementById('backToTop');
-        if (window.scrollY > 300) {
-            backToTop.classList.remove('opacity-0', 'pointer-events-none');
-            backToTop.classList.add('opacity-100', 'pointer-events-auto');
-        } else {
-            backToTop.classList.add('opacity-0', 'pointer-events-none');
-            backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+        if (backToTop) {
+            if (scrollY > 300) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                backToTop.classList.add('opacity-100', 'pointer-events-auto');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+                backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+            }
         }
+
+        // Active Section Highlighting
+        let currentSectionId = '';
+        // Threshold offset for section entry (150px before screen center/top)
+        const thresholdOffset = 150;
+        for (let i = 0; i < cachedSections.length; i++) {
+            const sectionInfo = cachedSections[i];
+            if (scrollY >= (sectionInfo.top - thresholdOffset)) {
+                currentSectionId = sectionInfo.id;
+            }
+        }
+
+        if (currentSectionId) {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes(currentSectionId)) {
+                    link.classList.add('active', 'text-brand');
+                    link.classList.remove('text-gray-300');
+                } else {
+                    link.classList.remove('active', 'text-brand');
+                    link.classList.add('text-gray-300');
+                }
+            });
+        }
+    }
+
+    // Attach unified scroll event
+    if (lenis) {
+        lenis.on('scroll', (e) => {
+            handleScroll(e.scroll);
+        });
+        // Call immediately for initial state
+        handleScroll(lenis.scroll);
+    } else {
+        window.addEventListener('scroll', () => {
+            handleScroll(window.scrollY);
+        }, { passive: true });
+        handleScroll(window.scrollY);
+    }
+
+    // --- Premium Anchor Link Clicks ---
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href === '#' || href === '') return;
+
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+                e.preventDefault();
+                const stickyHeaderHeight = 80; // height of compressed glass navbar
+
+                if (lenis) {
+                    lenis.scrollTo(targetElement, {
+                        offset: -stickyHeaderHeight,
+                        duration: 1.2,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                    });
+                } else {
+                    const targetTop = targetElement.getBoundingClientRect().top + window.scrollY - stickyHeaderHeight;
+                    window.scrollTo({
+                        top: targetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
     });
 
     // --- Mobile Menu Toggle ---
@@ -40,30 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     mobileLinks.forEach(link => {
         link.addEventListener('click', toggleMenu);
-    });
-
-    // --- Active Link Highlight ---
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= (sectionTop - 150)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active', 'text-brand');
-            link.classList.add('text-gray-300');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active', 'text-brand');
-                link.classList.remove('text-gray-300');
-            }
-        });
     });
 
     // --- Stats Counter Animation ---
