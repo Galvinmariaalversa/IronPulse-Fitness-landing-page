@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let lenis = null;
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Debounce helper to optimize resize listener performance
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
+
     if (!isReducedMotion && typeof Lenis !== 'undefined') {
         lenis = new Lenis({
             duration: 1.2,
@@ -42,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Run cache calculation once and update on window resize (avoid layout thrashing)
     updateSectionOffsets();
-    window.addEventListener('resize', updateSectionOffsets, { passive: true });
+    window.addEventListener('resize', debounce(updateSectionOffsets, 100), { passive: true });
 
     // Single unified scroll handler
     function handleScroll(scrollY) {
@@ -159,23 +169,37 @@ document.addEventListener('DOMContentLoaded', () => {
     let started = false;
 
     function startCount(el) {
-        const target = parseInt(el.dataset.target);
-        
-        const updateCount = () => {
-             // Get the number part only, though initial text is 0+
-             // We can just store current count in a variable not dependent on innerText
-             // But to follow the prompt's simplicity:
-             const count = +el.innerText.replace(/\D/g,'');
-             const increment = target / 50; 
+        const target = parseFloat(el.dataset.target);
+        const hasDot = el.innerText.includes('.');
+        const finalTarget = hasDot ? target / 10 : target;
 
-             if (count < target) {
-                 el.innerText = Math.ceil(count + increment) + "+";
-                 setTimeout(updateCount, 40);
-             } else {
-                 el.innerText = target + "+";
-             }
-        };
-        updateCount();
+        if (isReducedMotion) {
+            el.innerText = hasDot ? finalTarget.toFixed(1) : finalTarget + "+";
+            return;
+        }
+
+        const duration = 2000; // 2 seconds
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = progress * (2 - progress); // easeOutQuad
+            const currentValue = easedProgress * finalTarget;
+
+            if (hasDot) {
+                el.innerText = currentValue.toFixed(1);
+            } else {
+                el.innerText = Math.floor(currentValue) + "+";
+            }
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = hasDot ? finalTarget.toFixed(1) : finalTarget + "+";
+            }
+        }
+        requestAnimationFrame(update);
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -235,18 +259,55 @@ document.addEventListener('DOMContentLoaded', () => {
     if(nextBtn) nextBtn.addEventListener('click', nextSlide);
     if(prevBtn) prevBtn.addEventListener('click', prevSlide);
 
-    // Auto slide
-    let slideInterval = setInterval(nextSlide, 4000);
+    // Auto slide control with visibility and hover detection
+    let slideInterval = null;
+    let isHovered = false;
+
+    function startSlideShow() {
+        stopSlideShow();
+        slideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopSlideShow() {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
+    }
 
     // Pause on hover
     const sliderContainer = document.querySelector('.testimonial-slider');
-    if(sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-        sliderContainer.addEventListener('mouseleave', () => slideInterval = setInterval(nextSlide, 4000));
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', () => {
+            isHovered = true;
+            stopSlideShow();
+        }, { passive: true });
+        sliderContainer.addEventListener('mouseleave', () => {
+            isHovered = false;
+            if (document.visibilityState === 'visible') {
+                startSlideShow();
+            }
+        }, { passive: true });
     }
+
+    // Pause when tab/window is inactive
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            stopSlideShow();
+        } else {
+            if (!isHovered) {
+                startSlideShow();
+            }
+        }
+    }, { passive: true });
     
     // Initial show
-    if(slides.length > 0) showSlide(0);
+    if (slides.length > 0) {
+        showSlide(0);
+        if (document.visibilityState === 'visible') {
+            startSlideShow();
+        }
+    }
 
 
     // --- Scroll Reveal Animation ---
@@ -406,17 +467,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Before/After Image Slider ---
     const sliderInput = document.getElementById('beforeAfterSlider');
-    const afterImgContainer = document.getElementById('after-img-container');
-    const sliderHandle = document.getElementById('slider-handle');
 
     if (sliderInput) {
+        const sliderWidget = sliderInput.parentElement;
+        let ticking = false;
+
         sliderInput.addEventListener('input', (e) => {
             const val = e.target.value;
-            if (afterImgContainer) {
-                afterImgContainer.style.clipPath = `inset(0 0 0 ${val}%)`;
-            }
-            if (sliderHandle) {
-                sliderHandle.style.left = `${val}%`;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (sliderWidget) {
+                        sliderWidget.style.setProperty('--slider-val', `${val}%`);
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
     }
@@ -578,21 +643,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
             priceVals.forEach(val => {
                 const targetPrice = isAnnual ? val.dataset.annual : val.dataset.monthly;
-                val.style.transform = 'scale(0.9)';
-                val.style.transition = 'transform 0.15s ease';
-                setTimeout(() => {
+                if (isReducedMotion) {
                     val.innerText = targetPrice;
-                    val.style.transform = 'scale(1)';
-                }, 150);
+                } else {
+                    val.style.transform = 'scale(0.9)';
+                    val.style.transition = 'transform 0.15s ease';
+                    setTimeout(() => {
+                        val.innerText = targetPrice;
+                        val.style.transform = 'scale(1)';
+                    }, 150);
+                }
             });
 
             priceSubs.forEach(sub => {
-                sub.style.opacity = '0';
-                sub.style.transition = 'opacity 0.15s ease';
-                setTimeout(() => {
+                if (isReducedMotion) {
                     sub.innerText = isAnnual ? sub.dataset.annual : sub.dataset.monthly;
-                    sub.style.opacity = '1';
-                }, 150);
+                } else {
+                    sub.style.opacity = '0';
+                    sub.style.transition = 'opacity 0.15s ease';
+                    setTimeout(() => {
+                        sub.innerText = isAnnual ? sub.dataset.annual : sub.dataset.monthly;
+                        sub.style.opacity = '1';
+                    }, 150);
+                }
             });
         });
     }

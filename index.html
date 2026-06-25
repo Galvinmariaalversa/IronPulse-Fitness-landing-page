@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IronPulse Fitness | Transform Your Body</title>
 
-    <!-- Google Fonts -->
+    <!-- Preconnect & Preloads -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Preload Hero Image (LCP optimization) -->
+    <link rel="preload" href="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" as="image">
+
+    <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap"
         rel="stylesheet">
@@ -197,7 +206,7 @@
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop"
-                alt="Gym Background" class="w-full h-full object-cover">
+                alt="Gym Background" width="1470" height="980" fetchpriority="high" decoding="sync" class="w-full h-full object-cover">
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
 
@@ -439,7 +448,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Alex Carter</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Powerlifting Basics" data-time="06:00 AM (Mon)">Book Slot</button>
@@ -457,7 +466,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Sarah Jenkins</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Fat Burn Circuit" data-time="08:30 AM (Mon)">Book Slot</button>
@@ -475,7 +484,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Marcus Lee</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Vinyasa Flow" data-time="05:00 PM (Mon)">Book Slot</button>
@@ -494,7 +503,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Sarah Jenkins</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Morning Cardio Dance" data-time="07:00 AM (Tue)">Book Slot</button>
@@ -512,7 +521,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Alex Carter</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Hypertrophy Chest & Arms" data-time="06:00 PM (Tue)">Book Slot</button>
@@ -531,7 +540,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Sarah Jenkins</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Core Crusher Circuit" data-time="09:00 AM (Wed)">Book Slot</button>
@@ -549,7 +558,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Marcus Lee</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Ashtanga Yoga" data-time="06:30 PM (Wed)">Book Slot</button>
@@ -568,7 +577,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Alex Carter</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Leg Day Power Hour" data-time="07:00 AM (Thu)">Book Slot</button>
@@ -586,7 +595,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Sarah Jenkins</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Dance Fitness Jam" data-time="05:00 PM (Thu)">Book Slot</button>
@@ -605,7 +614,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Sarah Jenkins</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Full Body Tabata" data-time="06:00 AM (Fri)">Book Slot</button>
@@ -623,7 +632,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Alex Carter</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Olympic Lifting Basics" data-time="05:30 PM (Fri)">Book Slot</button>
@@ -642,7 +651,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Marcus Lee</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Weekend Deep Stretch" data-time="08:00 AM (Sat)">Book Slot</button>
@@ -660,7 +669,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
                         <div class="flex items-center gap-2">
-                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-brand/50">
+                            <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=100&auto=format&fit=crop" loading="lazy" decoding="async" width="32" height="32" class="w-8 h-8 rounded-full object-cover border border-brand/50">
                             <span class="text-gray-300 text-xs font-medium">Sarah Jenkins</span>
                         </div>
                         <button class="book-class-btn px-4 py-2 bg-transparent border border-brand text-brand hover:bg-brand hover:text-dark text-xs font-bold rounded-full transition-colors" data-class="Partner CrossFit WOD" data-time="10:00 AM (Sat)">Book Slot</button>
@@ -683,8 +692,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <!-- Trainer 1 -->
                 <div class="group relative overflow-hidden rounded-2xl fade-up">
-                    <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1887&auto=format&fit=crop"
-                        alt="Trainer"
+                    <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=500&auto=format&fit=crop"
+                        alt="Trainer Alex Carter" width="400" height="500" loading="lazy" decoding="async"
                         class="w-full h-[380px] sm:h-[450px] md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -703,8 +712,8 @@
 
                 <!-- Trainer 2 -->
                 <div class="group relative overflow-hidden rounded-2xl fade-up" style="transition-delay: 100ms;">
-                    <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=1887&auto=format&fit=crop"
-                        alt="Trainer"
+                    <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=500&auto=format&fit=crop"
+                        alt="Trainer Sarah Jenkins" width="400" height="500" loading="lazy" decoding="async"
                         class="w-full h-[380px] sm:h-[450px] md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -723,8 +732,8 @@
 
                 <!-- Trainer 3 -->
                 <div class="group relative overflow-hidden rounded-2xl fade-up" style="transition-delay: 200ms;">
-                    <img src="https://images.unsplash.com/photo-1549476464-37392f717541?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGd5bSUyMGJveXxlbnwwfHwwfHx8MA%3D%3D"
-                        alt="Trainer"
+                    <img src="https://images.unsplash.com/photo-1549476464-37392f717541?q=80&w=500&auto=format&fit=crop"
+                        alt="Trainer Marcus Lee" width="400" height="500" loading="lazy" decoding="async"
                         class="w-full h-[380px] sm:h-[450px] md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -762,28 +771,32 @@
             <!-- Grid Layout -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[350px] sm:h-[450px] md:h-[600px]">
                 <div class="gallery-item col-span-2 row-span-2 rounded-2xl h-full fade-up">
-                    <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=1469&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=800&auto=format&fit=crop"
+                        width="800" height="600" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700" alt="Gym Interior">
                     <div class="gallery-overlay absolute inset-0 flex items-center justify-center">
                         <i class="fas fa-search-plus text-3xl text-white"></i>
                     </div>
                 </div>
                 <div class="gallery-item col-span-1 row-span-1 rounded-2xl h-full fade-up">
-                    <img src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=1469&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=400&auto=format&fit=crop"
+                        width="400" height="300" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700" alt="Weight Rack">
                     <div class="gallery-overlay absolute inset-0 flex items-center justify-center">
                         <i class="fas fa-search-plus text-3xl text-white"></i>
                     </div>
                 </div>
                 <div class="gallery-item col-span-1 row-span-1 rounded-2xl h-full fade-up">
-                    <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1469&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=400&auto=format&fit=crop"
+                        width="400" height="300" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700" alt="Training">
                     <div class="gallery-overlay absolute inset-0 flex items-center justify-center">
                         <i class="fas fa-search-plus text-3xl text-white"></i>
                     </div>
                 </div>
                 <div class="gallery-item col-span-2 row-span-1 rounded-2xl h-full fade-up">
-                    <img src="https://images.unsplash.com/photo-1637666062717-1c6bcfa4a4df?q=80&w=1470&auto=format&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1637666062717-1c6bcfa4a4df?q=80&w=800&auto=format&fit=crop"
+                        width="800" height="300" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700" alt="Cardio">
                     <div class="gallery-overlay absolute inset-0 flex items-center justify-center">
                         <i class="fas fa-search-plus text-3xl text-white"></i>
@@ -815,23 +828,23 @@
                     </div>
 
                     <!-- Slider Widget -->
-                    <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden group select-none shadow-2xl">
+                    <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden group select-none shadow-2xl" style="--slider-val: 50%;">
                         <!-- Before Image (Base) -->
                         <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop" 
-                             alt="Before transformation" 
+                             alt="Before transformation" width="800" height="600" loading="lazy" decoding="async"
                              class="absolute inset-0 w-full h-full object-cover">
                         <div class="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white px-3 py-1 text-xs font-bold uppercase rounded tracking-wider z-20">Before</div>
 
                         <!-- After Image (Overlay, clipped) -->
-                        <div id="after-img-container" class="absolute inset-0 w-full h-full pointer-events-none z-10" style="clip-path: inset(0 0 0 50%);">
+                        <div id="after-img-container" class="absolute inset-0 w-full h-full pointer-events-none z-10" style="clip-path: inset(0 0 0 var(--slider-val, 50%));">
                             <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop" 
-                                 alt="After transformation" 
+                                 alt="After transformation" width="800" height="600" loading="lazy" decoding="async"
                                  class="absolute inset-0 w-full h-full object-cover">
                             <div class="absolute bottom-4 right-4 bg-brand text-dark px-3 py-1 text-xs font-bold uppercase rounded tracking-wider">After</div>
                         </div>
 
                         <!-- Drag Bar & Handle -->
-                        <div id="slider-handle" class="absolute top-0 bottom-0 w-1 bg-brand z-20 pointer-events-none flex items-center justify-center" style="left: 50%;">
+                        <div id="slider-handle" class="absolute top-0 bottom-0 w-1 bg-brand z-20 pointer-events-none flex items-center justify-center" style="left: var(--slider-val, 50%);">
                             <div class="w-10 h-10 rounded-full bg-brand text-dark border-4 border-surface shadow-xl flex items-center justify-center">
                                 <i class="fas fa-arrows-alt-h text-sm"></i>
                             </div>
@@ -929,8 +942,8 @@
                         changed my life. I lost 15kg in 6 months and have never felt stronger. The trainers actually
                         care about your progress."</p>
                     <div class="flex flex-col items-center">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User"
-                            class="w-16 h-16 rounded-full border-2 border-brand mb-3">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User David Chen"
+                            width="64" height="64" loading="lazy" decoding="async" class="w-16 h-16 rounded-full border-2 border-brand mb-3">
                         <h4 class="text-lg font-bold">David Chen</h4>
                         <div class="text-yellow-400 text-sm">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -946,8 +959,8 @@
                         atmosphere here is unmatched. No judgment, just pure motivation. The equipment is top-tier and
                         always clean."</p>
                     <div class="flex flex-col items-center">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User"
-                            class="w-16 h-16 rounded-full border-2 border-brand mb-3">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Emma Wilson"
+                            width="64" height="64" loading="lazy" decoding="async" class="w-16 h-16 rounded-full border-2 border-brand mb-3">
                         <h4 class="text-lg font-bold">Emma Wilson</h4>
                         <div class="text-yellow-400 text-sm">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
@@ -963,8 +976,8 @@
                         investment I've made for myself. Valid trainers, great music, and the neon vibe keeps you
                         pumped!"</p>
                     <div class="flex flex-col items-center">
-                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User"
-                            class="w-16 h-16 rounded-full border-2 border-brand mb-3">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User James Rodriguez"
+                            width="64" height="64" loading="lazy" decoding="async" class="w-16 h-16 rounded-full border-2 border-brand mb-3">
                         <h4 class="text-lg font-bold">James Rodriguez</h4>
                         <div class="text-yellow-400 text-sm">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i

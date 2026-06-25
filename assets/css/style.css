@@ -102,11 +102,13 @@ h6 {
 
 /* Card Hover Animations */
 .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .hover-lift:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) translateZ(0);
 }
 
 /* Stats Counter */
@@ -183,6 +185,11 @@ h6 {
     overflow: hidden;
 }
 
+.gallery-item img {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
 .gallery-overlay {
     background: rgba(0, 0, 0, 0.6);
     opacity: 0;
@@ -194,7 +201,7 @@ h6 {
 }
 
 .gallery-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.1) translateZ(0);
 }
 
 /* Toast Customization */
@@ -325,16 +332,18 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) {
 
 /* Enhanced Hover Effects */
 .btn-hover-fx {
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .btn-hover-fx:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(212, 240, 17, 0.3);
+    transform: translateY(-2px) translateZ(0);
+    box-shadow: 0 8px 24px rgba(212, 240, 17, 0.35);
 }
 
 .btn-hover-fx:active {
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
 }
 
 input, textarea {
@@ -364,7 +373,9 @@ input:focus, textarea:focus {
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
     border-radius: 16px !important;
     margin-bottom: 1.25rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform;
+    transform: translateZ(0);
     position: relative;
     overflow: hidden;
 }
@@ -372,7 +383,7 @@ input:focus, textarea:focus {
 .accordion-item-custom:hover {
     border-color: rgba(212, 240, 17, 0.25) !important;
     background: rgba(255, 255, 255, 0.04) !important;
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateZ(0);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
