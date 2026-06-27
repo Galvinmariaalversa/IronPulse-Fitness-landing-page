@@ -1,0 +1,19 @@
+{
+  "name": "ironpulse-optimizer",
+  "version": "1.0.0",
+  "description": "Asset and performance optimizer for IronPulse Fitness page",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i assets/css/style.css -o assets/css/main.min.css --minify",
+    "download:assets": "node scratch/download-assets.js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "terser": "^5.48.0"
+  },
+  "dependencies": {
+    "sharp": "^0.33.3"
+  }
+}

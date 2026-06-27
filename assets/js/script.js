@@ -388,9 +388,11 @@ document.addEventListener('DOMContentLoaded', () => {
             dayTabs.forEach(t => {
                 t.classList.remove('bg-brand', 'text-dark', 'border-brand');
                 t.classList.add('bg-surface', 'text-gray-300', 'border-white/5', 'hover:border-brand/30');
+                t.setAttribute('aria-selected', 'false');
             });
             tab.classList.remove('bg-surface', 'text-gray-300', 'border-white/5', 'hover:border-brand/30');
             tab.classList.add('bg-brand', 'text-dark', 'border-brand');
+            tab.setAttribute('aria-selected', 'true');
             currentDay = tab.dataset.day;
             filterSchedule();
         });
@@ -401,8 +403,10 @@ document.addEventListener('DOMContentLoaded', () => {
             catFilters.forEach(f => {
                 f.classList.remove('text-brand', 'border-brand');
                 f.classList.add('text-gray-400', 'border-transparent', 'hover:text-white');
+                f.setAttribute('aria-selected', 'false');
             });
             filter.classList.remove('text-gray-400', 'border-transparent', 'hover:text-white');
+            filter.setAttribute('aria-selected', 'true');
             filter.classList.add('text-brand', 'border-brand');
             currentCategory = filter.dataset.category;
             filterSchedule();

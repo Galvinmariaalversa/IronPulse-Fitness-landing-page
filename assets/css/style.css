@@ -1,5 +1,9 @@
-/* Fonts Setup */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts Setup - Localized */
+@import url('../fonts/fonts.css');
 
 :root {
     --brand: #D4F011;
@@ -497,3 +501,21 @@ input:focus, textarea:focus {
 #mobile-menu.menu-open .flex-col > .mobile-link:nth-child(5) { transition-delay: 200ms; }
 #mobile-menu.menu-open .flex-col > .mobile-link:nth-child(6) { transition-delay: 240ms; }
 #mobile-menu.menu-open .mt-8 .mobile-link { transition-delay: 280ms; }
+
+/* Accessibility: Hide closed modals and menus from screen readers and focus tree */
+#mobile-menu {
+    visibility: hidden;
+    pointer-events: none;
+}
+#mobile-menu:not(.-translate-x-full) {
+    visibility: visible;
+    pointer-events: auto;
+}
+#bookingModal, #lightboxModal {
+    visibility: hidden;
+    pointer-events: none;
+}
+#bookingModal.show, #lightboxModal.show {
+    visibility: visible;
+    pointer-events: auto;
+}
